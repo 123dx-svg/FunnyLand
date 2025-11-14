@@ -1,3 +1,4 @@
+#include <fstream>
 #include <iostream>
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
@@ -10,11 +11,112 @@
 //如果要测试请打开main
 int main() {
 
+	// spdlog::set_level(spdlog::level::trace);//不设置的话默认是info级别  过滤日志级别
+	//
+	//  spdlog::trace("最低级别日志");
+	//  spdlog::debug("调试日志");
+	//  spdlog::info("你好！世界！");
+	//  spdlog::warn("警告日志");
+	//  spdlog::error("错误日志");
+	//  spdlog::critical("严重错误日志");
 	
-	spdlog::info("你好！世界！");
-	nlohmann::json json_data = {{"a",10}};
-	auto num = json_data["a"].get<int>();
-	spdlog::warn("json = {}", num);
+	//格式化输出
+	spdlog::info("格式化输出 {} {} {}", 1,"hello", 3.14f);
+
+	try
+	{
+		std::ifstream file("assets/json_example.json");
+		//nlohmann::ordered_json json;//这个可以输出为顺序的json 代价是性能下降
+		nlohmann::json json_data = nlohmann::json::parse(file);
+		file.close();
+		spdlog::info("Json 成功载入");
+		//1、字符串打印
+		std::string name = json_data["name"].get<std::string>();
+		spdlog::info("name: {}", name);
+		//2、数字打印
+		int age = json_data["age"].get<int>();
+		spdlog::info("age: {}", age);
+		//3、double打印
+		double height = json_data["height_meters"].get<double>();
+		spdlog::info("height_meters: {}", height);
+		//4、bool打印
+		bool isStudent = json_data["isStudent"].get<bool>();
+		spdlog::info("isStudent: {}", isStudent);
+		//5、null打印
+		if (json_data["middleName"].is_null())
+		{
+			spdlog::info("middleName: null");
+		}
+		else
+		{
+			spdlog::info("middleName: {}", json_data.get<std::string>());
+		}
+		//另外一种方式  at  与 [] 不同的是，at 会检查索引是否越界，而 [] 不会。
+		std::string email = json_data.at("email").get<std::string>();
+		spdlog::info("email: {}", email);
+		
+		//value()用法 会查找optional_int  如果不存在  则返回默认值 -99
+		int optional_int = json_data.value("optional_int", -99);
+		spdlog::info("optional_int: {}", optional_int);
+		
+		//对象Objec
+		nlohmann::json address_obj = json_data["address"];
+		std::string street = address_obj["street"].get<std::string>();
+		std::string city = address_obj["city"].get<std::string>();
+		spdlog::info("Address: {} ,City: {}", street, city);
+		
+		//字符串数组
+		spdlog::info("Hobbies");
+		nlohmann::json hobbies_array = json_data["hobbies"];
+		for (auto& hobby : hobbies_array)
+		{
+			spdlog::info("-{}", hobby.get<std::string>());
+		}
+		//数字数组
+		spdlog::info("Scores");
+		nlohmann::json scores_array = json_data["scores"];
+		for (auto& score : scores_array)
+		{
+			if (score.is_number_integer())
+			{
+				spdlog::info("-{}", score.get<int>());
+			}
+			else if (score.is_number_float())
+			{
+				spdlog::info("-{}", score.get<double>());
+			}
+		}
+		
+		//对象数组
+		spdlog::info("projects");
+		nlohmann::json projects_array = json_data["projects"];
+		for (auto& project : projects_array)
+		{
+			std::string name = project["projectName"].get<std::string>();
+			spdlog::info("-{}", name);
+		}
+		spdlog::info("----------------------------------------");
+		//直接访问深层嵌套的对象和数组
+		double metadata_version = json_data["metadata"]["version"].get<double>();
+		spdlog::info("metadata_version: {}", metadata_version);
+
+		for (const auto& tag_json:json_data["metadata"]["tags"])
+		{
+			std::string tag = tag_json.get<std::string>();
+			spdlog::info("-{}", tag);
+		}
+		//将json数据保存为文件
+		std::ofstream out_file("assets/save_json.json");
+		out_file<<json_data.dump(4); // 4 是缩进空格数//将json数据保存为文件
+		out_file.close();
+		spdlog::info("--------------------json已经保存------------------");
+
+	}
+	catch (const std::exception& e)
+	{
+		spdlog::error("Exception: {}", e.what());
+		return EXIT_FAILURE;
+	}
 	
 
 	glm::vec2 a = glm::vec2(1.0f, 2.0f);
