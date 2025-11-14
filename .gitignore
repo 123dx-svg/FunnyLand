@@ -43,7 +43,4 @@
 /FunnyLand/x64
 /.vs
 /.idea
-/ThirdParty/glm
-/ThirdParty/nlohmann_json
-/ThirdParty/SDL3
-/ThirdParty/spdlog
+
