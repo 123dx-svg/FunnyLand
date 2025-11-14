@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{edecb9e6-6e32-413f-a59c-6abdff7e7d19}</ProjectGuid>
+    <RootNamespace>FunnyLand</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>..\ThirdParty\SDL3\include;..\ThirdParty\glm\include;..\ThirdParty\nlohmann_json\include;..\ThirdParty\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL3.lib;SDL3_image.lib;SDL3_mixer.lib;SDL3_test.lib;SDL3_ttf.lib;glm.lib;spdlogd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\ThirdParty\SDL3\lib;..\ThirdParty\glm\lib;..\ThirdParty\spdlog\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>..\ThirdParty\SDL3\include;..\ThirdParty\glm\include;..\ThirdParty\nlohmann_json\include;..\ThirdParty\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL3.lib;SDL3_image.lib;SDL3_mixer.lib;SDL3_test.lib;SDL3_ttf.lib;glm.lib;spdlogd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\ThirdParty\SDL3\lib;..\ThirdParty\glm\lib;..\ThirdParty\spdlog\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>..\ThirdParty\SDL3\include;..\ThirdParty\glm\include;..\ThirdParty\nlohmann_json\include;..\ThirdParty\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL3.lib;SDL3_image.lib;SDL3_mixer.lib;SDL3_test.lib;SDL3_ttf.lib;glm.lib;spdlogd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\ThirdParty\SDL3\lib\x64;..\ThirdParty\glm\lib;..\ThirdParty\spdlog\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>..\ThirdParty\SDL3\include;..\ThirdParty\glm\include;..\ThirdParty\nlohmann_json\include;..\ThirdParty\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL3.lib;SDL3_image.lib;SDL3_mixer.lib;SDL3_test.lib;SDL3_ttf.lib;glm.lib;spdlogd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\ThirdParty\SDL3\lib\x64;..\ThirdParty\glm\lib;..\ThirdParty\spdlog\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\audio\button_click.wav" />
+    <Content Include="assets\audio\button_hover.wav" />
+    <Content Include="assets\audio\cartoon-jump-6462.mp3" />
+    <Content Include="assets\audio\dead-8bit-41400.mp3" />
+    <Content Include="assets\audio\frog_quak-81741.mp3" />
+    <Content Include="assets\audio\hurry_up_and_run.ogg" />
+    <Content Include="assets\audio\monster.mp3" />
+    <Content Include="assets\audio\platformer_level03_loop.ogg" />
+    <Content Include="assets\audio\poka01.mp3" />
+    <Content Include="assets\audio\punch2a.mp3" />
+    <Content Include="assets\fonts\VonwaonBitmap-16px.ttf" />
+    <Content Include="assets\json_example.json" />
+    <Content Include="assets\textures\Actors\eagle-attack.png" />
+    <Content Include="assets\textures\Actors\foxy.png" />
+    <Content Include="assets\textures\Actors\frog.png" />
+    <Content Include="assets\textures\Actors\opossum.png" />
+    <Content Include="assets\textures\FX\enemy-deadth.png" />
+    <Content Include="assets\textures\FX\item-feedback.png" />
+    <Content Include="assets\textures\Items\cherry.png" />
+    <Content Include="assets\textures\Items\gem.png" />
+    <Content Include="assets\textures\Layers\back.png" />
+    <Content Include="assets\textures\Layers\middle.png" />
+    <Content Include="assets\textures\Layers\tileset.png" />
+    <Content Include="assets\textures\Preview.png" />
+    <Content Include="assets\textures\Props\big-crate.png" />
+    <Content Include="assets\textures\Props\big-house.png" />
+    <Content Include="assets\textures\Props\block-big.png" />
+    <Content Include="assets\textures\Props\block.png" />
+    <Content Include="assets\textures\Props\bush.png" />
+    <Content Include="assets\textures\Props\crank-down.png" />
+    <Content Include="assets\textures\Props\crank-up.png" />
+    <Content Include="assets\textures\Props\crate.png" />
+    <Content Include="assets\textures\Props\door-opened.png" />
+    <Content Include="assets\textures\Props\door.png" />
+    <Content Include="assets\textures\Props\face-block.png" />
+    <Content Include="assets\textures\Props\house.png" />
+    <Content Include="assets\textures\Props\palm.png" />
+    <Content Include="assets\textures\Props\pine.png" />
+    <Content Include="assets\textures\Props\plant-house.png" />
+    <Content Include="assets\textures\Props\platform-long.png" />
+    <Content Include="assets\textures\Props\rock-1.png" />
+    <Content Include="assets\textures\Props\rock-2.png" />
+    <Content Include="assets\textures\Props\rock.png" />
+    <Content Include="assets\textures\Props\shrooms.png" />
+    <Content Include="assets\textures\Props\sign.png" />
+    <Content Include="assets\textures\Props\skulls.png" />
+    <Content Include="assets\textures\Props\small-platform.png" />
+    <Content Include="assets\textures\Props\spike-skull.png" />
+    <Content Include="assets\textures\Props\spikes-top.png" />
+    <Content Include="assets\textures\Props\spikes.png" />
+    <Content Include="assets\textures\Props\straw-house.png" />
+    <Content Include="assets\textures\Props\tree-house.png" />
+    <Content Include="assets\textures\Props\tree.png" />
+    <Content Include="assets\textures\Props\wooden-house.png" />
+    <Content Include="assets\textures\UI\buttons\Back1.png" />
+    <Content Include="assets\textures\UI\buttons\Back2.png" />
+    <Content Include="assets\textures\UI\buttons\Back3.png" />
+    <Content Include="assets\textures\UI\buttons\Helps1.png" />
+    <Content Include="assets\textures\UI\buttons\Helps2.png" />
+    <Content Include="assets\textures\UI\buttons\Helps3.png" />
+    <Content Include="assets\textures\UI\buttons\Load1.png" />
+    <Content Include="assets\textures\UI\buttons\Load2.png" />
+    <Content Include="assets\textures\UI\buttons\Load3.png" />
+    <Content Include="assets\textures\UI\buttons\Quit1.png" />
+    <Content Include="assets\textures\UI\buttons\Quit2.png" />
+    <Content Include="assets\textures\UI\buttons\Quit3.png" />
+    <Content Include="assets\textures\UI\buttons\Restart1.png" />
+    <Content Include="assets\textures\UI\buttons\Restart2.png" />
+    <Content Include="assets\textures\UI\buttons\Restart3.png" />
+    <Content Include="assets\textures\UI\buttons\Resume1.png" />
+    <Content Include="assets\textures\UI\buttons\Resume2.png" />
+    <Content Include="assets\textures\UI\buttons\Resume3.png" />
+    <Content Include="assets\textures\UI\buttons\Save1.png" />
+    <Content Include="assets\textures\UI\buttons\Save2.png" />
+    <Content Include="assets\textures\UI\buttons\Save3.png" />
+    <Content Include="assets\textures\UI\buttons\Start1.png" />
+    <Content Include="assets\textures\UI\buttons\Start2.png" />
+    <Content Include="assets\textures\UI\buttons\Start3.png" />
+    <Content Include="assets\textures\UI\credits-text.png" />
+    <Content Include="assets\textures\UI\Heart-bg.png" />
+    <Content Include="assets\textures\UI\Heart.png" />
+    <Content Include="assets\textures\UI\instructions.png" />
+    <Content Include="assets\textures\UI\press-enter-text.png" />
+    <Content Include="assets\textures\UI\title-screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="assets\maps\" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
