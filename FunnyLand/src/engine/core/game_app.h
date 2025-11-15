@@ -1,10 +1,17 @@
 ﻿#pragma once
+#include <memory>
+
 
 struct SDL_Window;
 struct SDL_Renderer;
 
 namespace  engine::core
 {
+    
+
+    class Time;
+
+
     class GameApp final // final 表示不能被继承
     {
     private:    
@@ -12,6 +19,9 @@ namespace  engine::core
         SDL_Window* window_ = nullptr;
         SDL_Renderer* renderer_ = nullptr;
         bool is_running_ = false;
+        
+        //时间管理
+        std::unique_ptr<Time> time_;//此类独享
         
     public:
         GameApp();
