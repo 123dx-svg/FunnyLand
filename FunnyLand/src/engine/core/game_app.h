@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include <memory>
 
+#include "../resource/resource_manager.h"
+
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -20,8 +22,9 @@ namespace  engine::core
         SDL_Renderer* renderer_ = nullptr;
         bool is_running_ = false;
         
-        //时间管理
-        std::unique_ptr<Time> time_;//此类独享
+        //引擎组件
+        std::unique_ptr<engine::core::Time> time_;//deltatime 计算
+        std::unique_ptr<engine::resource::ResourceManager> resource_manager_;
         
     public:
         GameApp();
@@ -43,6 +46,13 @@ namespace  engine::core
         void render();
         void close();
         
+        //各个模块初始化
+        bool initSDL();
+        bool initTime();
+        bool initResourceManager();
+        
+        //测试资源管理器用
+        void testResourceManager();
     };
 }
 
