@@ -1,10 +1,11 @@
 ﻿#include "game_app.h"
 #include "time.h"
-#include <SDL3/SDL_init.h>
-#include <SDL3/SDL_render.h>
+#include "../resource/resource_manager.h"
+#include "../render/sprite.h"
+#include "../render/renderer.h"
+#include "../render/camera.h"
+#include <SDL3/SDL.h>
 #include <spdlog/spdlog.h>
-
-
 namespace  engine::core
 {
     
@@ -48,9 +49,13 @@ bool GameApp::init()
    if (!initSDL()) return false;
    if (!initTime()) return false;
    if (!initResourceManager()) return false;
+   if (!initRenderer()) return false;
+   if (!initCamera()) return false;
     
     //测试资源管理器
    testResourceManager();
+   testRenderer();
+   testCamera();
     
    is_running_ = true;
    spdlog::trace("GameApp初始化完成");
@@ -69,12 +74,14 @@ void GameApp::handleEvents()
 
 void GameApp::update(float delta_time)
 {
-    
+    testCamera();
 }
 
 void GameApp::render()
 {
-    
+    renderer_->clearScreen();
+    testRenderer();
+    renderer_->present();
 }
 
 void GameApp::close()
@@ -84,9 +91,9 @@ void GameApp::close()
     //为了确保正确的销毁顺序，有些智能指针需要手动管理
     resource_manager_.reset();
     
-    if (renderer_) {
-        SDL_DestroyRenderer(renderer_);
-        renderer_ = nullptr;
+    if (sdl_renderer_) {
+        SDL_DestroyRenderer(sdl_renderer_);
+        sdl_renderer_ = nullptr;
     }
     if (window_) {
         SDL_DestroyWindow(window_);
@@ -110,11 +117,17 @@ bool GameApp::initSDL()
         return false;
     }
     //创建渲染器
-    renderer_ = SDL_CreateRenderer(window_, nullptr);
-    if (!renderer_) {
+    sdl_renderer_ = SDL_CreateRenderer(window_, nullptr);
+    if (!sdl_renderer_) {
         spdlog::error("SDL 创建渲染器失败: {}", SDL_GetError());
         return false;
     }
+    
+    //设置逻辑分辨率
+    SDL_SetRenderLogicalPresentation(sdl_renderer_,640,360,SDL_LOGICAL_PRESENTATION_LETTERBOX);
+    
+    
+    
     spdlog::trace("SDL 初始化完成");
     return true;
 }
@@ -137,7 +150,7 @@ bool GameApp::initResourceManager()
 {
     try
     {
-        resource_manager_ = std::make_unique<engine::resource::ResourceManager>(renderer_);
+        resource_manager_ = std::make_unique<engine::resource::ResourceManager>(sdl_renderer_);
         
     }catch (const std::exception& e)
     {
@@ -145,6 +158,34 @@ bool GameApp::initResourceManager()
         return false;
     }
     spdlog::trace("初始化资源管理器成功");
+    return true;
+}
+
+bool GameApp::initRenderer()
+{
+    try
+    {
+        renderer_ = std::make_unique<engine::render::Renderer>(sdl_renderer_,resource_manager_.get());
+    }catch (const std::exception& e)
+    {
+        spdlog::error("初始化渲染器失败: {}", e.what());
+        return false;
+    }
+    spdlog::trace("初始化渲染器成功");
+    return true;
+}
+
+bool GameApp::initCamera()
+{
+    try
+    {
+        camera_ = std::make_unique<engine::render::Camera>(glm::vec2(640,360));
+    }catch (const std::exception& e)
+    {
+        spdlog::error("初始化相机失败: {}", e.what());
+        return false;
+    }
+    spdlog::trace("初始化相机成功");
     return true;
 }
 
@@ -159,4 +200,26 @@ void GameApp::testResourceManager()
     resource_manager_->unloadSound("assets/audio/button_click.wav");
 }
 
+void GameApp::testRenderer()
+{
+    engine::render::Sprite sprite_world("assets/textures/Actors/frog.png");
+    engine::render::Sprite sprite_ui("assets/textures/UI/buttons/Start1.png");
+    engine::render::Sprite sprite_parallax("assets/textures/Layers/back.png");
+    
+    static  float rotation = 0.0f;
+    rotation += 0.1f;
+    //渲染顺序
+    renderer_->drawParallax(*camera_,sprite_parallax,glm::vec2(100,100),glm::vec2(0.5f,0.5f),glm::bvec2(true,false));
+    renderer_->drawSprite(*camera_,sprite_world,glm::vec2(100,100),glm::vec2(1),rotation);
+    renderer_->drawUISprite(sprite_ui,glm::vec2(100,100));
+}
+
+void GameApp::testCamera()
+{
+    auto key_state = SDL_GetKeyboardState(nullptr);
+    if (key_state[SDL_SCANCODE_UP]) camera_->move(glm::vec2(0,-1));
+    if (key_state[SDL_SCANCODE_DOWN]) camera_->move(glm::vec2(0,1));
+    if (key_state[SDL_SCANCODE_LEFT]) camera_->move(glm::vec2(-1,0));
+    if (key_state[SDL_SCANCODE_RIGHT]) camera_->move(glm::vec2(1,0));
+}
 }
