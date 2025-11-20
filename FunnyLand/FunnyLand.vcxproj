@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\engine\core\config.cpp" />
     <ClCompile Include="src\engine\core\game_app.cpp" />
     <ClCompile Include="src\engine\core\time.cpp" />
     <ClCompile Include="src\engine\render\camera.cpp" />
@@ -164,6 +165,7 @@
     <Content Include="assets\audio\platformer_level03_loop.ogg" />
     <Content Include="assets\audio\poka01.mp3" />
     <Content Include="assets\audio\punch2a.mp3" />
+    <Content Include="assets\config.json" />
     <Content Include="assets\fonts\VonwaonBitmap-16px.ttf" />
     <Content Include="assets\json_example.json" />
     <Content Include="assets\textures\Actors\eagle-attack.png" />
@@ -244,6 +246,7 @@
     <Folder Include="assets\maps\" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\engine\core\config.h" />
     <ClInclude Include="src\engine\core\game_app.h" />
     <ClInclude Include="src\engine\core\time.h" />
     <ClInclude Include="src\engine\render\camera.h" />

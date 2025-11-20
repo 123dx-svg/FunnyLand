@@ -1,0 +1,48 @@
+{
+    "window": {
+        "title": "FunnyLand",
+        "width": 1280,
+        "height": 720,
+        "resizable": true
+    },
+    "graphics": {
+        "vsync": true
+    },
+    "performance": {
+        "target_fps": 144
+    },
+    "audio": {
+        "music_volume": 0.5,
+        "sound_volume": 0.5
+    },
+    "input_mappings": {
+        "move_up": [
+            "UP",
+            "W"
+        ],
+        "move_left": [
+            "Left",
+            "A"
+        ],
+        "move_down": [
+            "DOWN",
+            "S"
+        ],
+        "move_right": [
+            "Right",
+            "D"
+        ],
+        "attack": [
+            "MouseLeft",
+            "K"
+        ],
+        "pause": [
+            "ESCAPE",
+            "P"
+        ],
+        "jump": [
+            "SPACE",
+            "J"
+        ]
+    }
+}

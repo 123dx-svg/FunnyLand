@@ -48,7 +48,7 @@ namespace engine::render
 
         if (!isRectInViewport(camera,dest_rect)) 
         {
-            spdlog::trace("精灵{}超出视口范围，不绘制",sprite.getTextureId());
+            //spdlog::trace("精灵{}超出视口范围，不绘制",sprite.getTextureId());
             return;
         }
         

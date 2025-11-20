@@ -19,7 +19,7 @@ namespace  engine::core
 {
   
 
-
+    class Config;
     class Time;
 
 
@@ -36,6 +36,7 @@ namespace  engine::core
         std::unique_ptr<engine::resource::ResourceManager> resource_manager_;
         std::unique_ptr<engine::render::Renderer> renderer_;
         std::unique_ptr<engine::render::Camera> camera_;
+        std::unique_ptr<Config> config_;
         
     public:
         GameApp();
@@ -58,6 +59,7 @@ namespace  engine::core
         void close();
         
         //各个模块初始化
+        [[nodiscard]] bool initConfig();
         [[nodiscard]] bool initSDL();
         [[nodiscard]] bool initTime();
         [[nodiscard]] bool initResourceManager();

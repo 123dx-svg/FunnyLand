@@ -6,6 +6,9 @@
 #include "../render/camera.h"
 #include <SDL3/SDL.h>
 #include <spdlog/spdlog.h>
+
+#include "config.h"
+
 namespace  engine::core
 {
     
@@ -27,8 +30,6 @@ void GameApp::run()
         return;
     }
     
-    time_->setTargetFPS(144);//设置目标帧率 后期从配置文件读取
-    
     while (is_running_)
     {
         time_->update();
@@ -46,6 +47,7 @@ void GameApp::run()
 bool GameApp::init()
 {
    spdlog::trace("初始化 GameApp...");
+    if (!initConfig()) return false;
    if (!initSDL()) return false;
    if (!initTime()) return false;
    if (!initResourceManager()) return false;
@@ -102,7 +104,21 @@ void GameApp::close()
     SDL_Quit();
     is_running_ = false;
 }
-    
+
+bool GameApp::initConfig()
+{
+    try
+    {
+        config_ = std::make_unique<Config>("assets/config.json");
+    }catch (const std::exception& e)
+    {
+        spdlog::error("初始化配置失败: {}", e.what());
+        return false;
+    }
+    spdlog::trace("初始化配置成功");
+    return true;
+}
+
 bool GameApp::initSDL()
 {
     // SDL初始化
@@ -111,7 +127,7 @@ bool GameApp::initSDL()
         return false;
     }
     //创建窗口
-    window_ = SDL_CreateWindow("FunnyLand", 1280, 720, SDL_WINDOW_RESIZABLE);
+    window_ = SDL_CreateWindow(config_->window_title_.c_str(), config_->window_width_, config_->window_height_, SDL_WINDOW_RESIZABLE);
     if (!window_) {
         spdlog::error("SDL 创建窗口失败: {}", SDL_GetError());
         return false;
@@ -123,9 +139,13 @@ bool GameApp::initSDL()
         return false;
     }
     
-    //设置逻辑分辨率
-    SDL_SetRenderLogicalPresentation(sdl_renderer_,640,360,SDL_LOGICAL_PRESENTATION_LETTERBOX);
+    //设置垂直同步
+    int vsync_mode = config_->vsync_enabled_ ? SDL_RENDERER_VSYNC_ADAPTIVE:SDL_RENDERER_VSYNC_DISABLED;
+    SDL_SetRenderVSync(sdl_renderer_, vsync_mode);
+    spdlog::trace("VSync 模式: {}", vsync_mode);
     
+    //设置逻辑分辨率 视口的一半大
+    SDL_SetRenderLogicalPresentation(sdl_renderer_,config_->window_width_/2,config_->window_height_/2,SDL_LOGICAL_PRESENTATION_LETTERBOX);
     
     
     spdlog::trace("SDL 初始化完成");
@@ -142,6 +162,7 @@ bool GameApp::initTime()
         spdlog::error("初始化 Time 失败: {}", e.what());
         return false;
     }
+    time_->setTargetFPS(config_->target_fps_);
     spdlog::trace("初始化 Time 成功");
     return true;
 }
