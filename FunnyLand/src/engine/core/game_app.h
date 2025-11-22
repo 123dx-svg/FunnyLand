@@ -1,6 +1,11 @@
 ﻿#pragma once
 #include <memory>
 
+namespace engine::input
+{
+    class InputManager;
+}
+
 namespace engine::render
 {
     class Camera;
@@ -37,6 +42,7 @@ namespace  engine::core
         std::unique_ptr<engine::render::Renderer> renderer_;
         std::unique_ptr<engine::render::Camera> camera_;
         std::unique_ptr<Config> config_;
+        std::unique_ptr<input::InputManager> input_manager_;
         
     public:
         GameApp();
@@ -65,11 +71,13 @@ namespace  engine::core
         [[nodiscard]] bool initResourceManager();
         [[nodiscard]] bool initRenderer();
         [[nodiscard]] bool initCamera();
+        [[nodiscard]] bool initInputManager();
         
         //测试资源管理器用
         void testResourceManager();
         void testRenderer();
         void testCamera();
+        void testInputManager();
     };
 }
 

@@ -147,6 +147,7 @@
     <ClCompile Include="src\engine\core\config.cpp" />
     <ClCompile Include="src\engine\core\game_app.cpp" />
     <ClCompile Include="src\engine\core\time.cpp" />
+    <ClCompile Include="src\engine\input\input_manager.cpp" />
     <ClCompile Include="src\engine\render\camera.cpp" />
     <ClCompile Include="src\engine\render\renderer.cpp" />
     <ClCompile Include="src\engine\resource\audio_manager.cpp" />
@@ -249,6 +250,7 @@
     <ClInclude Include="src\engine\core\config.h" />
     <ClInclude Include="src\engine\core\game_app.h" />
     <ClInclude Include="src\engine\core\time.h" />
+    <ClInclude Include="src\engine\input\input_manager.h" />
     <ClInclude Include="src\engine\render\camera.h" />
     <ClInclude Include="src\engine\render\renderer.h" />
     <ClInclude Include="src\engine\render\sprite.h" />
