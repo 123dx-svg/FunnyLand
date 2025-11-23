@@ -1,10 +1,12 @@
 ﻿#pragma once
-#include "../object/game_object.h"
-
-
 namespace engine::object
 {
     class GameObject;
+}
+
+namespace engine::core
+{
+    class Context;
 }
 
 namespace engine::component
@@ -19,7 +21,6 @@ namespace engine::component
     
     class Component
     {
-    public:
         friend class engine::object::GameObject;  // 它需要调用Component的init方法
         
     protected:
@@ -42,9 +43,9 @@ namespace engine::component
         
         virtual void init() {}  //GameObject 添加组件时自动调用 不需要外部调用
         
-        virtual void handleInput() {}
-        virtual void update(float) {}
-        virtual void render() {}
+        virtual void handleInput(engine::core::Context&) {}
+        virtual void update(float, engine::core::Context&) = 0; ///< @brief 更新组件状态的纯虚函数
+        virtual void render(engine::core::Context&) {}
         virtual void clean() {}
         
     };

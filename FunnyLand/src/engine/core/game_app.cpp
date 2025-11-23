@@ -6,14 +6,17 @@
 #include "../render/camera.h"
 #include "../input/input_manager.h"
 #include "../object/game_object.h"
-#include "../component/component.h"
+#include "../component/transform_component.h"
+#include "../component/sprite_component.h"
+#include "config.h"
+#include "context.h"
 #include <SDL3/SDL.h>
 #include <spdlog/spdlog.h>
 
-#include "config.h"
-
 namespace  engine::core
 {
+    
+engine::object::GameObject game_object("test_game_object"); 
     
 GameApp::GameApp() =default;
 
@@ -37,7 +40,8 @@ void GameApp::run()
     {
         time_->update();
         float delta_time = time_->getDeltaTime();
-        input_manager_->update();
+        input_manager_->update();//输入更新管理
+        
         handleEvents();
         update(delta_time);
         render();
@@ -58,6 +62,7 @@ bool GameApp::init()
    if (!initRenderer()) return false;
    if (!initCamera()) return false;
    if (!initInputManager()) return false;
+   if (!initContext()) return false;
     
     //测试资源管理器
    testResourceManager();
@@ -88,9 +93,19 @@ void GameApp::update(float delta_time)
 
 void GameApp::render()
 {
+    //固定流程顺序不要搞错
+    
+    // 1. 清除屏幕
     renderer_->clearScreen();
+
+    // 2. 具体渲染代码
     testRenderer();
+    game_object.render(*context_);
+
+    // 3. 更新屏幕显示
     renderer_->present();
+    
+    
 }
 
 void GameApp::close()
@@ -232,6 +247,20 @@ bool GameApp::initInputManager()
     return true;
 }
 
+bool GameApp::initContext()
+{
+    try
+    {
+        context_ = std::make_unique<Context>(*input_manager_,*renderer_,*camera_,*resource_manager_);
+    }catch (const std::exception& e)
+    {
+        spdlog::error("初始化上下文失败: {}", e.what());
+        return false;
+    }
+    spdlog::trace("初始化上下文成功");
+    return true;
+}
+
 void GameApp::testInputManager()
 {
     std::vector<std::string> actions = {
@@ -245,23 +274,26 @@ void GameApp::testInputManager()
         "MouseLeftClick",
         "MouseRightClick"
     };
-    for (const auto& action : actions) {
-        if (input_manager_->isActionPressed(action)) {
-            spdlog::info(" {} 按下 ", action);
-        }
-        if (input_manager_->isActionReleased(action)) {
-            spdlog::info(" {} 抬起 ", action);
-        }
-        if (input_manager_->isActionDown(action)) {
-            spdlog::info(" {} 按下中 ", action);
-        }
-    }
+    // for (const auto& action : actions) {
+    //     if (input_manager_->isActionPressed(action)) {
+    //         spdlog::info(" {} 按下 ", action);
+    //     }
+    //     if (input_manager_->isActionReleased(action)) {
+    //         spdlog::info(" {} 抬起 ", action);
+    //     }
+    //     if (input_manager_->isActionDown(action)) {
+    //         spdlog::info(" {} 按下中 ", action);
+    //     }
+    // }
 }
 
 void GameApp::testGameObject()
 {
-    engine::object::GameObject game_object("test_game_object");
-    game_object.addComponent<engine::component::Component>();
+    
+    game_object.addComponent<engine::component::TransformComponent>(glm::vec2(100, 100));
+    game_object.addComponent<engine::component::SpriteComponent>("assets/textures/Props/big-crate.png", *resource_manager_, engine::utils::Alignment::CENTER);
+    // game_object.getComponent<engine::component::TransformComponent>()->setScale(glm::vec2(2.0f, 2.0f));
+    // game_object.getComponent<engine::component::TransformComponent>()->setRotation(30.0f);
 }
 
 void GameApp::testResourceManager()

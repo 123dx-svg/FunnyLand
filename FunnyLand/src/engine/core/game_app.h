@@ -22,8 +22,7 @@ struct SDL_Renderer;
 
 namespace  engine::core
 {
-  
-
+    class Context;
     class Config;
     class Time;
 
@@ -43,6 +42,7 @@ namespace  engine::core
         std::unique_ptr<engine::render::Camera> camera_;
         std::unique_ptr<Config> config_;
         std::unique_ptr<input::InputManager> input_manager_;
+        std::unique_ptr<engine::core::Context> context_;
         
     public:
         GameApp();
@@ -72,6 +72,7 @@ namespace  engine::core
         [[nodiscard]] bool initRenderer();
         [[nodiscard]] bool initCamera();
         [[nodiscard]] bool initInputManager();
+        [[nodiscard]] bool initContext();
         
         //测试资源管理器用
         void testResourceManager();

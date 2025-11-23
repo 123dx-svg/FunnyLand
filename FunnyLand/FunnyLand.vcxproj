@@ -144,7 +144,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\engine\component\sprite_component.cpp" />
+    <ClCompile Include="src\engine\component\transform_component.cpp" />
     <ClCompile Include="src\engine\core\config.cpp" />
+    <ClCompile Include="src\engine\core\context.cpp" />
     <ClCompile Include="src\engine\core\game_app.cpp" />
     <ClCompile Include="src\engine\core\time.cpp" />
     <ClCompile Include="src\engine\input\input_manager.cpp" />
@@ -249,7 +252,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\component\component.h" />
+    <ClInclude Include="src\engine\component\sprite_component.h" />
+    <ClInclude Include="src\engine\component\transform_component.h" />
     <ClInclude Include="src\engine\core\config.h" />
+    <ClInclude Include="src\engine\core\context.h" />
     <ClInclude Include="src\engine\core\game_app.h" />
     <ClInclude Include="src\engine\core\time.h" />
     <ClInclude Include="src\engine\input\input_manager.h" />
@@ -261,6 +267,7 @@
     <ClInclude Include="src\engine\resource\font_manager.h" />
     <ClInclude Include="src\engine\resource\resource_manager.h" />
     <ClInclude Include="src\engine\resource\texture_manager.h" />
+    <ClInclude Include="src\engine\utils\alignment.h" />
     <ClInclude Include="src\engine\utils\math.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
