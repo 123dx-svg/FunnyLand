@@ -1,5 +1,4 @@
 ﻿#include "game_object.h"
-#include "../component/component.h"
 #include "../render/renderer.h"
 #include "../input/input_manager.h" 
 #include "../render/camera.h"
@@ -12,6 +11,7 @@ namespace engine::object
     {
         spdlog::trace("GameObject created: {} {}", name_, tag_);
     }
+    
 
     void GameObject::update(float delta_time, engine::core::Context& context)
     {

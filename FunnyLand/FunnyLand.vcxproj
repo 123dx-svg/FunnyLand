@@ -158,6 +158,9 @@
     <ClCompile Include="src\engine\resource\font_manager.cpp" />
     <ClCompile Include="src\engine\resource\resource_manager.cpp" />
     <ClCompile Include="src\engine\resource\texture_manager.cpp" />
+    <ClCompile Include="src\engine\scene\scene.cpp" />
+    <ClCompile Include="src\engine\scene\scene_manager.cpp" />
+    <ClCompile Include="src\game\scene\game_scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\audio\button_click.wav" />
@@ -267,8 +270,11 @@
     <ClInclude Include="src\engine\resource\font_manager.h" />
     <ClInclude Include="src\engine\resource\resource_manager.h" />
     <ClInclude Include="src\engine\resource\texture_manager.h" />
+    <ClInclude Include="src\engine\scene\scene.h" />
+    <ClInclude Include="src\engine\scene\scene_manager.h" />
     <ClInclude Include="src\engine\utils\alignment.h" />
     <ClInclude Include="src\engine\utils\math.h" />
+    <ClInclude Include="src\game\scene\game_scene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

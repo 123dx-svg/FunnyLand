@@ -1,21 +1,15 @@
 ﻿#pragma once
-
-
+#include "../component/component.h" 
 #include <memory>
 #include <unordered_map>
 #include <typeindex>        // 用于类型索引
 #include <utility>          // 用于完美转发
 #include <spdlog/spdlog.h>
-
 namespace engine::core
 {
     class Context;
 }
 
-namespace engine::component
-{
-    class Component;
-}
 
 namespace engine::object
 {
