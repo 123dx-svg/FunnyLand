@@ -88,13 +88,13 @@ namespace engine::scene
 
     void Scene::addGameObject(std::unique_ptr<engine::object::GameObject>&& game_object)
     {
-        if (game_object) game_objects_.push_back(std::move(std::move(game_object)));
+        if (game_object) game_objects_.push_back(std::move(game_object));
         else spdlog::warn("尝试向场景 '{}' 添加空游戏对象指针。", scene_name_);
     }
 
     void Scene::safeAddGameObject(std::unique_ptr<engine::object::GameObject>&& game_object)
     {
-        if (game_object) pending_additions_.push_back(std::move(std::move(game_object)));
+        if (game_object) pending_additions_.push_back(std::move(game_object));
         else spdlog::warn("尝试向场景 '{}' 添加空游戏对象指针。", scene_name_);
     }
 
