@@ -176,6 +176,10 @@
     <Content Include="assets\config.json" />
     <Content Include="assets\fonts\VonwaonBitmap-16px.ttf" />
     <Content Include="assets\json_example.json" />
+    <Content Include="assets\maps\actor.tsj" />
+    <Content Include="assets\maps\level1.tmj" />
+    <Content Include="assets\maps\prop.tsj" />
+    <Content Include="assets\maps\tileset.tsj" />
     <Content Include="assets\textures\Actors\eagle-attack.png" />
     <Content Include="assets\textures\Actors\foxy.png" />
     <Content Include="assets\textures\Actors\frog.png" />
@@ -249,9 +253,6 @@
     <Content Include="assets\textures\UI\press-enter-text.png" />
     <Content Include="assets\textures\UI\title-screen.png" />
     <Content Include="项目结构.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="assets\maps\" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\component\component.h" />
