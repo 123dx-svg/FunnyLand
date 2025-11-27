@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\engine\component\parallax_component.cpp" />
     <ClCompile Include="src\engine\component\sprite_component.cpp" />
     <ClCompile Include="src\engine\component\transform_component.cpp" />
     <ClCompile Include="src\engine\core\config.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="src\engine\resource\font_manager.cpp" />
     <ClCompile Include="src\engine\resource\resource_manager.cpp" />
     <ClCompile Include="src\engine\resource\texture_manager.cpp" />
+    <ClCompile Include="src\engine\scene\level_loader.cpp" />
     <ClCompile Include="src\engine\scene\scene.cpp" />
     <ClCompile Include="src\engine\scene\scene_manager.cpp" />
     <ClCompile Include="src\game\scene\game_scene.cpp" />
@@ -252,10 +254,12 @@
     <Content Include="assets\textures\UI\instructions.png" />
     <Content Include="assets\textures\UI\press-enter-text.png" />
     <Content Include="assets\textures\UI\title-screen.png" />
+    <Content Include="Tiled地图解析思路.md" />
     <Content Include="项目结构.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine\component\component.h" />
+    <ClInclude Include="src\engine\component\parallax_component.h" />
     <ClInclude Include="src\engine\component\sprite_component.h" />
     <ClInclude Include="src\engine\component\transform_component.h" />
     <ClInclude Include="src\engine\core\config.h" />
@@ -271,6 +275,7 @@
     <ClInclude Include="src\engine\resource\font_manager.h" />
     <ClInclude Include="src\engine\resource\resource_manager.h" />
     <ClInclude Include="src\engine\resource\texture_manager.h" />
+    <ClInclude Include="src\engine\scene\level_loader.h" />
     <ClInclude Include="src\engine\scene\scene.h" />
     <ClInclude Include="src\engine\scene\scene_manager.h" />
     <ClInclude Include="src\engine\utils\alignment.h" />

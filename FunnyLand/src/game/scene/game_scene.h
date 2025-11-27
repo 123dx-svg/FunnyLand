@@ -39,7 +39,7 @@ namespace game::scene
     private:
         // 测试函数
         void createTestObject();
-        
+        void testCamera();
         
         
         
